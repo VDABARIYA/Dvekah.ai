@@ -30,3 +30,6 @@ This project is built to help creators, students, and businesses generate images
 
 ## 📦 Installation & Usage
 1. Clone the repository:
+```bash
+   git clone https://github.com/VDABARIYA/Dvekah.ai.git
+   ```
