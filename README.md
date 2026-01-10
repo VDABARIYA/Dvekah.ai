@@ -28,11 +28,5 @@ This project is built to help creators, students, and businesses generate images
 - API: HuggingFace Inference API
 - Hosting: GitHub Pages
 
----
-
-## 📦 Installation & Usage
-1. Clone the repositoryan image generator ai tool 
----
-
 ## 📦 Installation & Usage
 1. Clone the repository:
