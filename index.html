@@ -1,16 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Dvekah.ai</title>
-  <link rel="manifest" href="manifest.json">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="background:#111;color:white;text-align:center;padding:40px">
 
-<h1>🎨 Dvekah.ai</h1>
-<p>AI Image Generator</p>
+<body style="background:#111;color:white;text-align:center;padding:40px;font-family:Arial;">
 
-<input placeholder="Enter prompt">
-<button>Generate</button>
+  <h1>🎨 Dvekah.ai</h1>
+  <p>AI Image Generator</p>
+
+  <input 
+    type="text" 
+    id="prompt" 
+    placeholder="Enter prompt"
+    style="padding:10px;width:250px;"
+  >
+
+  <br><br>
+
+  <button 
+    id="generateBtn"
+    style="padding:10px 20px;cursor:pointer;"
+  >
+    Generate
+  </button>
+
+  <br><br>
+
+  <img id="result" width="300" style="display:none;border-radius:10px;" />
+
+  <script>
+    document.getElementById("generateBtn").addEventListener("click", async () => {
+      const prompt = document.getElementById("prompt").value;
+      if (!prompt) {
+        alert("Prompt likho");
+        return;
+      }
+
+      const img = document.getElementById("result");
+      img.style.display = "block";
+      img.src = "";
+
+      try {
+        const response = await fetch(
+          "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0",
+          {
+            method: "POST",
+            headers: {
+              "Authorization": "Bearer YOUR_HF_API_KEY",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ inputs: prompt })
+          }
+        );
+
+        const blob = await response.blob();
+        img.src = URL.createObjectURL(blob);
+
+      } catch (error) {
+        alert("Error aaya, thodi der baad try karo");
+        console.log(error);
+      }
+    });
+  </script>
 
 </body>
 </html>
